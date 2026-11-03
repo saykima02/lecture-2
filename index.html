@@ -995,15 +995,13 @@ window.addEventListener('resize',fit);fit();
   window.addEventListener('keydown',function(e){
     if(e.target.closest&&e.target.closest('.pv-jump'))return;
     if(!document.body.classList.contains('present')){ if(e.key==='p'||e.key==='P'){start(0);e.preventDefault();} return; }
-    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){go(i+1);e.preventDefault();}
+    if(e.key==='ArrowRight'||e.key==='PageDown'){go(i+1);e.preventDefault();}
     else if(e.key==='ArrowLeft'||e.key==='PageUp'){go(i-1);e.preventDefault();}
     else if(e.key==='Home'){go(0);e.preventDefault();}
     else if(e.key==='End'){go(S.length-1);e.preventDefault();}
     else if(e.key==='Escape'){stop();e.preventDefault();}
   });
-  S.forEach(function(s,k){s.addEventListener('click',function(e){
-    if(!document.body.classList.contains('present')||e.target.closest('button,a'))return; go(i+1);
-  })});
+  // 마우스 클릭으로는 넘어가지 않는다 — 발표 중 오작동 방지 (이동은 키보드 ←/→)
   // 장표 번호 이동
   var jump=document.createElement('form'); jump.className='pv-jump';
   jump.innerHTML='<input inputmode="numeric" enterkeyhint="go" autocomplete="off" aria-label="장표 번호" placeholder="번호 / '+S.length+'"><button type="submit">이동</button>';
